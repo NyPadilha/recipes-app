@@ -35,13 +35,13 @@ function Header({ routeName }) {
             src={ searchIcon }
             alt="searchIcon"
           />
-        </button>}
+                                                  </button>}
         {!searchInput ? false : true
 && <div
   data-testid="search-input"
 >
   aa
-   </div>}
+</div>}
       </header>
     </>
   );
