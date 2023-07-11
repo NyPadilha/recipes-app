@@ -30,6 +30,7 @@ function SearchBar() {
 
   return (
     <>
+      <input type="text" data-testid="search-input" />
       <label>
         Ingredient
         <input

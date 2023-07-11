@@ -27,24 +27,22 @@ function Header({ routeName }) {
             alt="profileIcon"
           />
         </button>
-        { ((routeName !== 'Profile') && (routeName !== 'Done Recipes')
-        && (routeName !== 'Favorite Recipes')) && <button
-          onClick={ () => (setSearchInput(!searchInput)) }
-        >
-          <img
-            data-testid="search-top-btn"
-            src={ searchIcon }
-            alt="searchIcon"
-          />
-                                                  </button>}
-        {!searchInput ? false : true
-&& <div
-  data-testid="search-input"
->
-  aa
-</div>}
+
+        { ((routeName !== 'Profile')
+        && (routeName !== 'Done Recipes')
+        && (routeName !== 'Favorite Recipes'))
+        && (
+          <button
+            onClick={ () => (setSearchInput(!searchInput)) }
+          >
+            <img
+              data-testid="search-top-btn"
+              src={ searchIcon }
+              alt="searchIcon"
+            />
+          </button>)}
+        {searchInput && <SearchBar />}
       </header>
-      <SearchBar />
     </>
   );
 }
