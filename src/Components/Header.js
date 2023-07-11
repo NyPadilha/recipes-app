@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header({ routeName }) {
+  const [searchInput, setSearchInput] = useState(false);
+
   const history = useHistory();
 
   const handleClick = () => {
@@ -24,12 +27,20 @@ function Header({ routeName }) {
           />
         </button>
         { ((routeName !== 'Profile') && (routeName !== 'Done Recipes')
-        && (routeName !== 'Favorite Recipes')) && <img
-          data-testid="search-top-btn"
-          src={ searchIcon }
-          alt="searchIcon"
-          type="button"
-        />}
+        && (routeName !== 'Favorite Recipes')) && <button
+          onClick={ () => (setSearchInput(!searchInput)) }
+        >
+          <img
+            data-testid="search-top-btn"
+            src={ searchIcon }
+            alt="searchIcon"
+          />
+        </button>}
+        {!searchInput ? false : true && <div
+          data-testid="search-input"
+        >
+          aa
+        </div>}
       </header>
     </>
   );
