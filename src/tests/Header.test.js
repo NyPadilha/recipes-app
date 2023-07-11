@@ -27,4 +27,20 @@ describe('Testando o componente Header', () => {
 
     expect(history.location.pathname).toBe('/profile');
   });
+  it('Verificando se o botão search esta funcionando corretamente', () => {
+    const { history } = renderWithRouter(<App />);
+    act(() => { history.push('/meals'); });
+
+    expect(history.location.pathname).toBe('/meals');
+
+    const buttonSearch = screen.getByTestId('search-top-btn');
+
+    userEvent.click(buttonSearch);
+    const inputSearch = screen.getByTestId('search-input');
+
+    expect(inputSearch).toBeInTheDocument();
+
+    userEvent.click(buttonSearch);
+    expect(inputSearch).not.toBeInTheDocument();
+  });
 });
