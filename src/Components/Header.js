@@ -41,8 +41,8 @@ function Header({ routeName }) {
               alt="searchIcon"
             />
           </button>)}
-        {searchInput && <SearchBar />}
       </header>
+      {searchInput && <SearchBar />}
     </>
   );
 }
