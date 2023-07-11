@@ -23,8 +23,9 @@ describe('Testando o componente searchBar', () => {
     const radioFirstLetter = screen.getByText('First Letter');
     const buttonHandleSearch = screen.getByTestId('exec-search-btn');
 
-    expect(buttonSearch && inputSearch && radioIngredient && radioName
-	&& radioFirstLetter && buttonHandleSearch).toBeInTheDocument();
+    expect(buttonSearch && inputSearch
+      && radioIngredient && radioName
+      && radioFirstLetter && buttonHandleSearch).toBeInTheDocument();
   });
   it('Verificando se o radio esta funcionando corretamente', async () => {
     const { history } = renderWithRouter(
@@ -43,6 +44,5 @@ describe('Testando o componente searchBar', () => {
     userEvent.type(inputSearch, 'egg');
     userEvent.click(radioFirstLetter);
     userEvent.click(buttonHandleSearch);
-
   });
 });

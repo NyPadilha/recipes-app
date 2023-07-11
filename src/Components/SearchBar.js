@@ -14,7 +14,7 @@ function SearchBar() {
       firstLetter: false,
     },
   );
-  const { location: { pathname } } = useHistory();
+  const { push, location: { pathname } } = useHistory();
 
   console.log(recipeData);
 
@@ -37,19 +37,34 @@ function SearchBar() {
     }
   };
 
+  const routeOneRecipe = (data) => {
+    const idDrink = data.drinks;
+    const idMeals = data.meals;
+
+    if (idMeals?.length === 1 && pathname === '/meals') {
+      return push(`/meals/${idMeals[0].idMeal}`);
+    }
+    if (idDrink?.length === 1 && pathname === '/drinks') {
+      return push(`/drinks/${idDrink[0].idDrink}`);
+    }
+  };
+
   const handleSearch = async () => {
     const { ingredient, name, firstLetter } = checkedInputs;
     if (ingredient) {
       const data = await fetchApiIngredient(inputValue, pathname);
       setRecipeData(data);
+      routeOneRecipe(data);
     }
     if (name) {
       const data = await fetchApiName(inputValue, pathname);
       setRecipeData(data);
+      routeOneRecipe(data);
     }
     if (firstLetter && inputValue.length === 1) {
       const data = await fetchApiFirstLetter(inputValue, pathname);
       setRecipeData(data);
+      routeOneRecipe(data);
     } else if (firstLetter && inputValue.length !== 1) {
       global.alert('Your search must have only 1 (one) character');
     }
