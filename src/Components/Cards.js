@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import RecipeContext from '../context/useContext';
 
-function Recipes() {
+function Cards() {
   const { recipeData } = useContext(RecipeContext);
+
   const { drinks, meals } = recipeData;
+
   return (
     <div>
       {
@@ -56,4 +58,4 @@ function Recipes() {
   );
 }
 
-export default Recipes;
+export default Cards;

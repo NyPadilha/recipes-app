@@ -5,6 +5,7 @@ import { fetchCategoryMeals, fetchCategoryDrinks } from '../helpers/fetchApi';
 
 function RecipeProvider({ children }) {
   const [recipeData, setRecipeData] = useState({});
+  const [filterRecipe, setFilterRecipe] = useState('');
   const [categoryDrinks, setCategoryDrinks] = useState({});
   const [categoryMeals, setCategoryMeals] = useState({});
   const [loading, setLoading] = useState(true);
@@ -29,7 +30,9 @@ function RecipeProvider({ children }) {
     setCategoryMeals,
     loading,
     setLoading,
-  }), [recipeData, categoryDrinks, categoryMeals, loading]);
+    filterRecipe,
+    setFilterRecipe,
+  }), [recipeData, categoryDrinks, categoryMeals, loading, filterRecipe]);
 
   return (
     <RecipeContext.Provider value={ store }>
