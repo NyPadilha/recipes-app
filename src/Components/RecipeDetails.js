@@ -23,6 +23,9 @@ export default function RecipeDetails() {
 
   console.log(meals);
   // pegar ingredients
+  // const ingredient = path === 'Meal'
+  //   ? meals.filter((key) => key.includes('strIngredient'))
+  //   : drinks.filter((key) => key.includes('strIngredient'));
 
   return (
     <div>
