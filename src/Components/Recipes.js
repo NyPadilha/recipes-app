@@ -2,8 +2,10 @@ import { useContext } from 'react';
 import RecipeContext from '../context/useContext';
 
 function Recipes() {
-  const { recipeData } = useContext(RecipeContext);
-  const { drinks, meals } = recipeData;
+  const { recipeData, filterRecipe } = useContext(RecipeContext);
+
+  const { drinks, meals } = filterRecipe !== '' ? filterRecipe : recipeData;
+  console.log(meals);
   return (
     <div>
       {

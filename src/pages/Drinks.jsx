@@ -9,7 +9,7 @@ import RecipeContext from '../context/useContext';
 
 function Drinks() {
   const routeName = 'Drinks';
-  const { setRecipeData, recipeData } = useContext(RecipeContext);
+  const { setRecipeData } = useContext(RecipeContext);
   const { location: { pathname } } = useHistory();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function Drinks() {
     };
     renderComponents();
   }, [pathname, setRecipeData]);
-  console.log(recipeData);
+  // console.log(recipeData);
   return (
     <div>
       <Header icon={ drinkIcon } routeName={ routeName } />
