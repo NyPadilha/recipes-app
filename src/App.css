@@ -9,13 +9,15 @@
   justify-content: center;
   width: 100%;
 }
+
 .cardMeals {
+  height: 200px;
   width: 200px;
-  height: 200px; 
 }
+
 .cardDrinks {
+  height: 200px;
   width: 200px;
-  height: 200px; 
 }
 
 .rocksGlass {
