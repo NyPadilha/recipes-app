@@ -8,6 +8,7 @@ import Drinks from './pages/Drinks';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/Done-Recipes';
 import FavoriteRecipes from './pages/Favorite-Recipes';
+import Cards from './Components/Cards';
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
         <Route path="/" exact component={ Login } />
         <Route path="/meals" component={ Meals } />
         <Route path="/drinks" component={ Drinks } />
-        <Route path="/meals/:id-da-receita" />
-        <Route path="/drinks/:id-da-receita" />
+        <Route path="/meals/:id-da-receita" component={ Cards } />
+        <Route path="/drinks/:id-da-receita" component={ Cards } />
         <Route path="/meals/:id-da-receita/in-progress" />
         <Route path="/drinks/:id-da-receita/in-progress" />
         <Route path="/profile" component={ Profile } />
