@@ -1,6 +1,6 @@
 export const fetchApiIngredient = async (parametro, rota) => {
   const urlMeals = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${parametro}`;
-  const urlDrinks = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${parametro}`;
+  const urlDrinks = `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${parametro}`;
 
   const response = await fetch((rota === '/meals') ? urlMeals : urlDrinks);
   const data = response.json();

@@ -39,6 +39,10 @@ function SearchBar() {
     const idDrink = data.drinks;
     const idMeals = data.meals;
 
+    if (data.ingredients === null || data.meals === null || data.drinks === null) {
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+
     if (idMeals?.length === 1 && pathname === '/meals') {
       return push(`/meals/${idMeals[0].idMeal}`);
     }
