@@ -38,3 +38,12 @@ export const fetchCategoryDrinks = async () => {
   const data = response.json();
   return data;
 };
+
+export const fetchApiUseEffect = async (rota) => {
+  const urlMeals = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+
+  const response = await fetch((rota === '/meals') ? urlMeals : urlDrinks);
+  const data = response.json();
+  return data;
+};
