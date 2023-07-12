@@ -13,11 +13,11 @@ function Recipes() {
           if (index <= validationIndex) {
             return (
               <div
-                className="cardMeals"
                 key={ strMeal }
                 data-testid={ `${index}-recipe-card` }
               >
                 <img
+                  className="cardMeals"
                   src={ strMealThumb }
                   alt={ strMeal }
                   data-testid={ `${index}-card-img` }

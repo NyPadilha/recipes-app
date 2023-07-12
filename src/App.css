@@ -9,6 +9,14 @@
   justify-content: center;
   width: 100%;
 }
+.cardMeals {
+  width: 200px;
+  height: 200px; 
+}
+.cardDrinks {
+  width: 200px;
+  height: 200px; 
+}
 
 .rocksGlass {
   animation: shake 1s infinite ease;

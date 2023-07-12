@@ -13,11 +13,11 @@ function Recipes() {
           if (index <= validationIndex) {
             return (
               <div
-                className="cardMeals"
                 key={ strMeal }
                 data-testid={ `${index}-recipe-card` }
               >
                 <img
+                  className="cardMeals"
                   src={ strMealThumb }
                   alt={ strMeal }
                   data-testid={ `${index}-card-img` }
@@ -36,11 +36,11 @@ function Recipes() {
           if (index <= validationIndex) {
             return (
               <div
-                className="cardDrinks"
                 key={ strDrink }
                 data-testid={ `${index}-recipe-card` }
               >
                 <img
+                  className="cardDrinks"
                   src={ strDrinkThumb }
                   alt={ strDrink }
                   data-testid={ `${index}-card-img` }
