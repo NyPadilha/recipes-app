@@ -47,3 +47,12 @@ export const fetchApiUseEffect = async (rota) => {
   const data = response.json();
   return data;
 };
+
+export const fetchApiRecipeID = async (parametro, rota) => {
+  const urlMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${parametro}`;
+  const urlDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${parametro}`;
+
+  const response = await fetch((rota.includes('meals')) ? urlMeals : urlDrinks);
+  const data = response.json();
+  return data;
+};
