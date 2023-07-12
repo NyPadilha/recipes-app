@@ -5,7 +5,7 @@ import { fetchApiIngredient, fetchApiName,
 import RecipeContext from '../context/useContext';
 
 function SearchBar() {
-  const { setRecipeData, recipeData } = useContext(RecipeContext);
+  const { setRecipeData } = useContext(RecipeContext);
   const [inputValue, setInputValue] = useState('');
   const [checkedInputs, setCheckedInputs] = useState(
     {
@@ -15,8 +15,6 @@ function SearchBar() {
     },
   );
   const { push, location: { pathname } } = useHistory();
-
-  console.log(recipeData);
 
   const handleChange = ({ target }) => {
     if (target.value === 'ingredient') {
