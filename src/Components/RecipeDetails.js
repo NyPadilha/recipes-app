@@ -21,7 +21,8 @@ export default function RecipeDetails() {
   const { meals, drinks } = details;
   const recipe = path === 'Meal' ? meals : drinks;
 
-  console.log(meals);
+  // console.log(meals);
+  console.log(details);
   // pegar ingredients
   // const ingredient = path === 'Meal'
   //   ? meals.filter((key) => key.includes('strIngredient'))
@@ -40,7 +41,18 @@ export default function RecipeDetails() {
                     alt="recipe"
                     data-testid="recipe-photo"
                   />
+                  {path === 'Drink' && (
+                    <img
+                      src={ detail.strDrinkThumb }
+                      alt="recipe"
+                      data-testid="recipe-photo"
+                    />
+                  )}
                   <h1 data-testid="recipe-title">{ detail.strMeal }</h1>
+                  {path === 'Drink' && (
+                    <h1 data-testid="recipe-title">{ detail.strDrink }</h1>
+                  )}
+
                   <h2 data-testid="recipe-category">{ detail.strCategory }</h2>
                   {
                     path === 'Drink' && (
@@ -49,9 +61,26 @@ export default function RecipeDetails() {
                   }
                   <h3>Ingredients</h3>
                   <ul>
-                    {/* {details[0].ingredients.map((ingredient, index) => (
-                <li key={ index }>{ingredient}</li>
-              ))} */}
+                    {
+                      Object.entries(detail).filter((key) => key[0].includes('strIngredient')).map((ingredient, index) => (
+                        <div
+                          data-testid={ `${index}-ingredient-name-and-measure` }
+                          key={ index }
+                        >
+                          {ingredient[1]}
+                        </div>
+                      ))
+                    }
+                    {
+                      Object.entries(detail).filter((key) => key[0].includes('strMeasure')).map((measure, index) => (
+                        <div
+                          data-testid={ `${index}-ingredient-name-and-measure` }
+                          key={ index }
+                        >
+                          {measure[1]}
+                        </div>
+                      ))
+                    }
                   </ul>
                   <h3>Instructions</h3>
 
@@ -60,6 +89,8 @@ export default function RecipeDetails() {
                     <div>
                       <h3>Video</h3>
                       <iframe
+                        data-testid="video"
+                        key="youtube"
                         width="560"
                         height="315"
                         src={ detail.strYoutube }
