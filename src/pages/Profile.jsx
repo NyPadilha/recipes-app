@@ -8,6 +8,11 @@ function Profile() {
   const routeName = 'Profile';
   const history = useHistory();
 
+  const logout = () => {
+    localStorage.clear();
+    history.push('/');
+  };
+
   useEffect(() => {
     const localEmail = JSON.parse(localStorage.getItem('user'));
     setProfileEmail(localEmail);
@@ -30,7 +35,12 @@ function Profile() {
         >
           Favorite Recipes
         </button>
-        <button data-testid="profile-logout-btn">Logout</button>
+        <button
+          data-testid="profile-logout-btn"
+          onClick={ () => logout() }
+        >
+          Logout
+        </button>
       </div>
       <Footer />
     </>
