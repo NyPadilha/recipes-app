@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchApiRecipeID, fetchApiUseEffect } from '../helpers/fetchApi';
+import StartRecipes from './StartRecipes';
 
 export default function RecipeDetails() {
   const [details, setDetails] = useState([]);
@@ -118,6 +119,7 @@ export default function RecipeDetails() {
           </div>
         )
       }
+      <StartRecipes details={ details } />
     </div>
   );
 }
