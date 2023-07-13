@@ -9,24 +9,16 @@ export default function RecipeDetails() {
 
   const path = pathname.includes('/meals') ? 'Meal' : 'Drink';
 
-  const getRecipe = async () => {
-    const recipe = await fetchApiRecipeID(id, pathname);
-    setDetails(recipe);
-  };
-
   useEffect(() => {
+    const getRecipe = async () => {
+      const recipe = await fetchApiRecipeID(id, pathname);
+      setDetails(recipe);
+    };
     getRecipe();
-  }, []);
+  }, [id, pathname]);
 
   const { meals, drinks } = details;
   const recipe = path === 'Meal' ? meals : drinks;
-
-  // console.log(meals);
-  console.log(details);
-  // pegar ingredients
-  // const ingredient = path === 'Meal'
-  //   ? meals.filter((key) => key.includes('strIngredient'))
-  //   : drinks.filter((key) => key.includes('strIngredient'));
 
   return (
     <div>
@@ -62,24 +54,28 @@ export default function RecipeDetails() {
                   <h3>Ingredients</h3>
                   <ul>
                     {
-                      Object.entries(detail).filter((key) => key[0].includes('strIngredient')).map((ingredient, index) => (
-                        <div
-                          data-testid={ `${index}-ingredient-name-and-measure` }
-                          key={ index }
-                        >
-                          {ingredient[1]}
-                        </div>
-                      ))
+                      Object.entries(detail).filter((key) => key[0]
+                        .includes('strIngredient'))
+                        .map((ingredient, index) => (
+                          <div
+                            data-testid={ `${index}-ingredient-name-and-measure` }
+                            key={ index }
+                          >
+                            {ingredient[1]}
+                          </div>
+                        ))
                     }
                     {
-                      Object.entries(detail).filter((key) => key[0].includes('strMeasure')).map((measure, index) => (
-                        <div
-                          data-testid={ `${index}-ingredient-name-and-measure` }
-                          key={ index }
-                        >
-                          {measure[1]}
-                        </div>
-                      ))
+                      Object
+                        .entries(detail).filter((key) => key[0].includes('strMeasure'))
+                        .map((measure, index) => (
+                          <div
+                            data-testid={ `${index}-ingredient-name-and-measure` }
+                            key={ index }
+                          >
+                            {measure[1]}
+                          </div>
+                        ))
                     }
                   </ul>
                   <h3>Instructions</h3>
