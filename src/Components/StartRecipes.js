@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import PropTypes from 'prop-types';
 
 function StartRecipes({ details }) {
   const [inProgress, setInProgress] = useState({ progress: false });
-  const [recipeInProgressStorage, setRecipeInProgressStorage] = useState('no');
+  const [setRecipeInProgressStorage] = useState('no');
   const localStorageRecipes = {
     drinks: [],
     meals: [],
@@ -91,12 +92,13 @@ function StartRecipes({ details }) {
             {(!localStorageInprogress) ? 'Start Recipe' : 'Continue Recipe'}
           </button>)
       }
-      {
-
-      }
 
     </div>
   );
 }
+
+StartRecipes.propTypes = {
+  details: PropTypes.shape,
+}.isRequired;
 
 export default StartRecipes;
