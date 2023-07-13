@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { fetchApiRecipeID } from '../helpers/fetchApi';
+import { fetchApiRecipeID, fetchApiUseEffect } from '../helpers/fetchApi';
 
 export default function RecipeDetails() {
   const [details, setDetails] = useState([]);
   const { id } = useParams();
+  const [mealsRecomendations, setMealsRecomendations] = useState([]);
+  const [drinksRecomendations, setDrinksRecomendations] = useState([]);
   const { location: { pathname } } = useHistory();
 
   const path = pathname.includes('/meals') ? 'Meal' : 'Drink';
@@ -16,6 +18,19 @@ export default function RecipeDetails() {
     };
     getRecipe();
   }, [id, pathname]);
+
+  useEffect(() => {
+    const getRecomendations = async () => {
+      const meals = await fetchApiUseEffect('/meals');
+      const drinks = await fetchApiUseEffect('/drinks');
+      setMealsRecomendations(meals);
+      setDrinksRecomendations(drinks);
+    };
+    getRecomendations();
+  }, []);
+
+  console.log(mealsRecomendations);
+  console.log(drinksRecomendations);
 
   const { meals, drinks } = details;
   const recipe = path === 'Meal' ? meals : drinks;
@@ -32,12 +47,14 @@ export default function RecipeDetails() {
                     src={ detail.strMealThumb }
                     alt="recipe"
                     data-testid="recipe-photo"
+                    className="cardMeals"
                   />
                   {path === 'Drink' && (
                     <img
                       src={ detail.strDrinkThumb }
                       alt="recipe"
                       data-testid="recipe-photo"
+                      className="cardDrinks"
                     />
                   )}
                   <h1 data-testid="recipe-title">{ detail.strMeal }</h1>
