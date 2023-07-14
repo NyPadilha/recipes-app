@@ -8,6 +8,7 @@ export default function RecipeDetails() {
   const { id } = useParams();
   const [mealsRecomendations, setMealsRecomendations] = useState([]);
   const [drinksRecomendations, setDrinksRecomendations] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { location: { pathname } } = useHistory();
 
   const path = pathname.includes('/meals') ? 'Meal' : 'Drink';
@@ -21,20 +22,19 @@ export default function RecipeDetails() {
   }, [id, pathname]);
 
   useEffect(() => {
-    const getRecomendations = async () => {
-      const meals = await fetchApiUseEffect('/meals');
+    const fetchRecomendations = async () => {
       const drinks = await fetchApiUseEffect('/drinks');
-      setMealsRecomendations(meals);
+      const meals = await fetchApiUseEffect('/meals');
       setDrinksRecomendations(drinks);
+      setMealsRecomendations(meals);
+      setLoading(true);
     };
-    getRecomendations();
+    fetchRecomendations();
   }, []);
-
-  console.log(mealsRecomendations);
-  console.log(drinksRecomendations);
 
   const { meals, drinks } = details;
   const recipe = path === 'Meal' ? meals : drinks;
+  const lintNumber = 6;
 
   return (
     <div>
@@ -113,6 +113,36 @@ export default function RecipeDetails() {
                       />
                     </div>
                   )}
+                  <div>
+                    { path === 'Meal' && (
+                      loading !== false && Object.values(drinksRecomendations)[0]
+                        .slice(0, lintNumber).map((recipes) => (
+                          <div key={ recipes.strDrink }>
+                            <img
+                              src={ recipes.strDrinkThumb }
+                              alt={ recipes.strDrink }
+                              className="cardDrinks"
+                            />
+                            <div>
+                              { recipes.strDrink }
+                            </div>
+                          </div>
+                        )))}
+                    { path === 'Drink' && (
+                      loading !== false && Object.values(mealsRecomendations)[0]
+                        .slice(0, lintNumber).map((recipes) => (
+                          <div key={ recipes.strMeal }>
+                            <img
+                              src={ recipes.strMealThumb }
+                              alt={ recipes.strMeal }
+                              className="cardMeals"
+                            />
+                            <div>
+                              { recipes.strMeal }
+                            </div>
+                          </div>
+                        )))}
+                  </div>
                 </div>
               ))
             }
