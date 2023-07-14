@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchApiRecipeID, fetchApiUseEffect } from '../helpers/fetchApi';
 import StartRecipes from './StartRecipes';
+import './RecipeDetails.css';
 
 export default function RecipeDetails() {
   const [details, setDetails] = useState([]);
@@ -113,31 +114,39 @@ export default function RecipeDetails() {
                       />
                     </div>
                   )}
-                  <div>
+                  <div className="carousel">
                     { path === 'Meal' && (
                       loading !== false && Object.values(drinksRecomendations)[0]
-                        .slice(0, lintNumber).map((recipes) => (
-                          <div key={ recipes.strDrink }>
+                        .slice(0, lintNumber).map((recipes, index) => (
+                          <div
+                            key={ recipes.strDrink }
+                            data-testid={ `${index}-recommendation-card` }
+                          >
                             <img
                               src={ recipes.strDrinkThumb }
                               alt={ recipes.strDrink }
                               className="cardDrinks"
                             />
-                            <div>
+                            <div
+                              data-testid={ `${index}-recommendation-title` }
+                            >
                               { recipes.strDrink }
                             </div>
                           </div>
                         )))}
                     { path === 'Drink' && (
                       loading !== false && Object.values(mealsRecomendations)[0]
-                        .slice(0, lintNumber).map((recipes) => (
-                          <div key={ recipes.strMeal }>
+                        .slice(0, lintNumber).map((recipes, index) => (
+                          <div
+                            key={ recipes.strMeal }
+                            data-testid={ `${index}-recommendation-card` }
+                          >
                             <img
                               src={ recipes.strMealThumb }
                               alt={ recipes.strMeal }
                               className="cardMeals"
                             />
-                            <div>
+                            <div data-testid={ `${index}-recommendation-title` }>
                               { recipes.strMeal }
                             </div>
                           </div>
