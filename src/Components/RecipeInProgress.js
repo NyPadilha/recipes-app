@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchApiRecipeID } from '../helpers/fetchApi';
 import FavoriteRecipes from './FavoriteRecipes';
+// eslint-disable-next-line import/no-named-as-default
+import FinishRecipeBtn from './FinishRecipeBtn';
 import ShareRecipes from './ShareRecipes';
 import './RecipeInProgress.css';
 
@@ -12,10 +14,6 @@ export default function RecipeInProgress() {
   const [allChecked, setAllChecked] = useState(false);
   const { id } = useParams();
   const { location: { pathname } } = useHistory();
-
-  console.log(checkboxStates);
-  console.log(ingredientsNumber.length);
-  console.log(allChecked);
 
   const path = pathname.includes('/meals') ? 'Meal' : 'Drink';
 
@@ -147,13 +145,7 @@ export default function RecipeInProgress() {
       }
       <FavoriteRecipes details={ recipeCurrent } />
       <ShareRecipes />
-      <button
-        data-testid="finish-recipe-btn"
-        disabled={ !allChecked }
-      >
-        Finish
-
-      </button>
+      <button data-testid="finish-recipe-btn">Finish</button>
     </div>
   );
 }

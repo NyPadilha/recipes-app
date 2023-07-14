@@ -43,7 +43,7 @@ function StartRecipes({ details }) {
       setRecipeInProgressStorage(validateRecipeStartMeals);
     }
   }
-  console.log(details);
+
   const inProgressLocalStorage = () => {
     const { meals, drinks } = details;
 
@@ -92,7 +92,6 @@ function StartRecipes({ details }) {
             {(!localStorageInprogress) ? 'Start Recipe' : 'Continue Recipe'}
           </button>)
       }
-
     </div>
   );
 }
