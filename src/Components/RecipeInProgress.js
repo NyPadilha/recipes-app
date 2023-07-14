@@ -21,6 +21,7 @@ export default function RecipeInProgress() {
 
   const { meals, drinks } = recipeCurrent;
   const recipes = path === 'Meal' ? meals : drinks;
+
   return (
     <div>
       {
@@ -62,20 +63,31 @@ export default function RecipeInProgress() {
                 )
               }
               <h3>Ingredients</h3>
-              <ul>
-                {
-                  Object.entries(recipe).filter((key) => key[0]
-                    .includes('strIngredient'))
-                    .map((ingredient, index) => (
-                      <li
-                        key={ index }
-                        data-testid={ `${index}-ingredient-name-and-measure` }
-                      >
-                        { `${ingredient[1]} - ${recipe[`strMeasure${index + 1}`]}` }
-                      </li>
-                    ))
-                }
-              </ul>
+
+              {
+                Object.entries(recipe).filter((key) => key[0]
+                  .includes('strIngredient'))
+
+                  .map((ingredient, index) => (
+                    (ingredient[1] !== '' && ingredient[1] !== null) && (
+                      <div key={ index }>
+                        <label
+                          htmlFor={ `ingredient-${index}` }
+                          data-testid={ `${index}-ingredient-step` }
+                        >
+                          <input
+                            type="checkbox"
+                            name={ `ingredient-${index}` }
+                            id={ `ingredient-${index}` }
+                          />
+                          {`${ingredient[1]} - ${recipe[`strMeasure${index + 1}`]}`}
+                        </label>
+
+                      </div>
+                    )
+
+                  ))
+              }
               <h3>Instructions</h3>
               <p data-testid="instructions">{ recipe.strInstructions }</p>
             </div>
