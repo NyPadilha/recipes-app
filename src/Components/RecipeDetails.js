@@ -160,7 +160,7 @@ export default function RecipeDetails() {
           </div>
         )
       }
-      <FavoriteRecipes />
+      <FavoriteRecipes details={ details } pathname={ pathname } id={ id } />
       <ShareRecipes />
       <StartRecipes details={ details } />
     </div>
