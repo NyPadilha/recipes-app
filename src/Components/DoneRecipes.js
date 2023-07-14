@@ -1,3 +1,5 @@
+import ShareRecipes from './ShareRecipes';
+
 function DoneRecipes() {
   const doneRecipesStorage = localStorage.getItem('doneRecipes');
   const convertDoneRecipes = JSON.parse(doneRecipesStorage);
@@ -20,7 +22,7 @@ function DoneRecipes() {
               <p data-testid={ `${index}-horizontal-top-text` }>{category}</p>
               <p data-testid={ `${index}-horizontal-name` }>{name}</p>
               <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
-              <button data-testid={ `${index}-horizontal-share-btn` }>SHARE</button>
+              <ShareRecipes />
               <p data-testid={ `${index}-${tagName}-horizontal-tag` }>{tags}</p>
             </div>
           );
