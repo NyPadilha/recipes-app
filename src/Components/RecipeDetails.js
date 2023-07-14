@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { fetchApiRecipeID } from '../helpers/fetchApi';
+import { fetchApiRecipeID, fetchApiUseEffect } from '../helpers/fetchApi';
+import StartRecipes from './StartRecipes';
+import './RecipeDetails.css';
 
 export default function RecipeDetails() {
   const [details, setDetails] = useState([]);
   const { id } = useParams();
+  const [mealsRecomendations, setMealsRecomendations] = useState([]);
+  const [drinksRecomendations, setDrinksRecomendations] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { location: { pathname } } = useHistory();
 
   const path = pathname.includes('/meals') ? 'Meal' : 'Drink';
@@ -17,9 +22,20 @@ export default function RecipeDetails() {
     getRecipe();
   }, [id, pathname]);
 
+  useEffect(() => {
+    const fetchRecomendations = async () => {
+      const drinks = await fetchApiUseEffect('/drinks');
+      const meals = await fetchApiUseEffect('/meals');
+      setDrinksRecomendations(drinks);
+      setMealsRecomendations(meals);
+      setLoading(true);
+    };
+    fetchRecomendations();
+  }, []);
+
   const { meals, drinks } = details;
   const recipe = path === 'Meal' ? meals : drinks;
-  console.log(recipe);
+  const lintNumber = 6;
 
   return (
     <div>
@@ -33,12 +49,14 @@ export default function RecipeDetails() {
                     src={ detail.strMealThumb }
                     alt="recipe"
                     data-testid="recipe-photo"
+                    className="cardMeals"
                   />
                   {path === 'Drink' && (
                     <img
                       src={ detail.strDrinkThumb }
                       alt="recipe"
                       data-testid="recipe-photo"
+                      className="cardDrinks"
                     />
                   )}
                   <h1 data-testid="recipe-title">{ detail.strMeal }</h1>
@@ -96,12 +114,51 @@ export default function RecipeDetails() {
                       />
                     </div>
                   )}
+                  <div className="carousel">
+                    { path === 'Meal' && (
+                      loading !== false && Object.values(drinksRecomendations)[0]
+                        .slice(0, lintNumber).map((recipes, index) => (
+                          <div
+                            key={ recipes.strDrink }
+                            data-testid={ `${index}-recommendation-card` }
+                          >
+                            <img
+                              src={ recipes.strDrinkThumb }
+                              alt={ recipes.strDrink }
+                              className="cardDrinks"
+                            />
+                            <div
+                              data-testid={ `${index}-recommendation-title` }
+                            >
+                              { recipes.strDrink }
+                            </div>
+                          </div>
+                        )))}
+                    { path === 'Drink' && (
+                      loading !== false && Object.values(mealsRecomendations)[0]
+                        .slice(0, lintNumber).map((recipes, index) => (
+                          <div
+                            key={ recipes.strMeal }
+                            data-testid={ `${index}-recommendation-card` }
+                          >
+                            <img
+                              src={ recipes.strMealThumb }
+                              alt={ recipes.strMeal }
+                              className="cardMeals"
+                            />
+                            <div data-testid={ `${index}-recommendation-title` }>
+                              { recipes.strMeal }
+                            </div>
+                          </div>
+                        )))}
+                  </div>
                 </div>
               ))
             }
           </div>
         )
       }
+      <StartRecipes details={ details } />
     </div>
   );
 }
