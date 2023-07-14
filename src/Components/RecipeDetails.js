@@ -46,7 +46,7 @@ export default function RecipeDetails() {
           <div>
             {
               recipe.map((detail) => (
-                <div key={ detail.strMeal }>
+                <div key={ `${detail.strMeal}1` }>
                   <img
                     src={ detail.strMealThumb }
                     alt="recipe"
@@ -80,7 +80,7 @@ export default function RecipeDetails() {
                         .map((ingredient, index) => (
                           <div
                             data-testid={ `${index}-ingredient-name-and-measure` }
-                            key={ index }
+                            key={ ingredient }
                           >
                             {ingredient[1]}
                           </div>
@@ -92,7 +92,7 @@ export default function RecipeDetails() {
                         .map((measure, index) => (
                           <div
                             data-testid={ `${index}-ingredient-name-and-measure` }
-                            key={ index }
+                            key={ measure }
                           >
                             {measure[1]}
                           </div>
@@ -160,7 +160,7 @@ export default function RecipeDetails() {
           </div>
         )
       }
-      <FavoriteRecipes />
+      <FavoriteRecipes details={ details } />
       <ShareRecipes />
       <StartRecipes details={ details } />
     </div>
