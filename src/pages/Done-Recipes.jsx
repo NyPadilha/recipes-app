@@ -1,11 +1,15 @@
 import Header from '../Components/Header';
 import drinkIcon from '../images/drinkIcon.svg';
+import DoneRecipes from '../Components/DoneRecipes';
 
-function DoneRecipes() {
+function Donerecipes() {
   const routeName = 'Done Recipes';
   return (
-    <Header icon={ drinkIcon } routeName={ routeName } />
+    <div>
+      <Header icon={ drinkIcon } routeName={ routeName } />
+      <DoneRecipes />
+    </div>
   );
 }
 
-export default DoneRecipes;
+export default Donerecipes;
