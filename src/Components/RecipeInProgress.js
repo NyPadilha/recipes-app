@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { fetchApiRecipeID } from '../helpers/fetchApi';
+import FavoriteRecipes from './FavoriteRecipes';
+import ShareRecipes from './ShareRecipes';
 
 export default function RecipeInProgress() {
   const [recipeCurrent, setRecipeCurrent] = useState([]);
@@ -79,8 +82,8 @@ export default function RecipeInProgress() {
           ))
         )
       }
-      <button data-testid="Share-btn">Share</button>
-      <button data-testid="favorite-btn">Favorite</button>
+      <FavoriteRecipes />
+      <ShareRecipes />
       <button data-testid="finish-recipe-btn">Finish</button>
     </div>
   );
