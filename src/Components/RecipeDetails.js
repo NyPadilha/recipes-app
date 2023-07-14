@@ -19,6 +19,7 @@ export default function RecipeDetails() {
 
   const { meals, drinks } = details;
   const recipe = path === 'Meal' ? meals : drinks;
+  console.log(recipe);
 
   return (
     <div>
