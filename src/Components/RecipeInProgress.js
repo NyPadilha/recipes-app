@@ -3,9 +3,11 @@ import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min
 import { fetchApiRecipeID } from '../helpers/fetchApi';
 import FavoriteRecipes from './FavoriteRecipes';
 import ShareRecipes from './ShareRecipes';
+import './RecipeInProgress.css';
 
 export default function RecipeInProgress() {
   const [recipeCurrent, setRecipeCurrent] = useState([]);
+  const [checkboxStates, setCheckboxStates] = useState([]);
   const { id } = useParams();
   const { location: { pathname } } = useHistory();
 
@@ -21,6 +23,13 @@ export default function RecipeInProgress() {
 
   const { meals, drinks } = recipeCurrent;
   const recipes = path === 'Meal' ? meals : drinks;
+
+  const handleChecked = (index) => {
+    setCheckboxStates((prevStates) => ({
+      ...prevStates,
+      [index]: !prevStates[index],
+    }));
+  };
 
   return (
     <div>
@@ -67,25 +76,25 @@ export default function RecipeInProgress() {
               {
                 Object.entries(recipe).filter((key) => key[0]
                   .includes('strIngredient'))
-
                   .map((ingredient, index) => (
                     (ingredient[1] !== '' && ingredient[1] !== null) && (
                       <div key={ index }>
                         <label
                           htmlFor={ `ingredient-${index}` }
                           data-testid={ `${index}-ingredient-step` }
+                          className={ checkboxStates[index] ? 'checked' : '' }
                         >
                           <input
                             type="checkbox"
                             name={ `ingredient-${index}` }
                             id={ `ingredient-${index}` }
+                            checked={ checkboxStates[index] }
+                            onChange={ () => handleChecked(index) }
                           />
                           {`${ingredient[1]} - ${recipe[`strMeasure${index + 1}`]}`}
                         </label>
-
                       </div>
                     )
-
                   ))
               }
               <h3>Instructions</h3>
