@@ -20,8 +20,8 @@ function App() {
         <Route exact path="/drinks" component={ Drinks } />
         <Route exact path="/meals/:id" render={ () => <RecipeDetails /> } />
         <Route exact path="/drinks/:id" render={ () => <RecipeDetails /> } />
-        <Route exact path="/meals/:id-da-receita/in-progress" />
-        <Route exact path="/drinks/:id-da-receita/in-progress" />
+        <Route exact path="/meals/:id/in-progress" />
+        <Route exact path="/drinks/:id/in-progress" />
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/done-recipes" component={ DoneRecipes } />
         <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
