@@ -82,7 +82,7 @@ export default function RecipeInProgress() {
           ))
         )
       }
-      <FavoriteRecipes />
+      <FavoriteRecipes details={ recipeCurrent } />
       <ShareRecipes />
       <button data-testid="finish-recipe-btn">Finish</button>
     </div>
