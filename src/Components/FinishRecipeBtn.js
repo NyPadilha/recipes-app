@@ -8,7 +8,11 @@ function FinishRecipeBtn({ recipeCurrent }) {
   const date = new Date();
   const today = date.getDate();
   const mes = date.getMonth() + 1;
-  const todayRecipe = `${today}/${mes}`;
+  const ano = date.getFullYear();
+  const horas = date.getHours();
+  const minutos = date.getMinutes();
+  const segundos = date.getMilliseconds();
+  const todayRecipe = `${ano}-${(mes.length !== 1) ? `0${mes}` : mes}-${today + 1}T00:${horas}:${minutos}.${segundos}Z`;
   const routeDone = '/done-recipes';
 
   const doneRecipesStorage = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -18,14 +22,14 @@ function FinishRecipeBtn({ recipeCurrent }) {
     } = meals[0];
     const doneRecipeMeal = {
       id: idMeal,
-      type: mealOrDrink,
+      type: mealOrDrink === 'meals' && 'meal',
       nationality: strArea === null ? '' : strArea,
       category: strCategory,
       alcoholicOrNot: !strAlcoholic ? '' : strAlcoholic,
       name: strMeal,
       image: strMealThumb,
       doneDate: todayRecipe,
-      tags: strTags === null ? '' : strTags,
+      tags: strTags === null ? [] : [...strTags.split(',')],
     };
     return doneRecipeMeal;
   };
@@ -35,14 +39,14 @@ function FinishRecipeBtn({ recipeCurrent }) {
     } = drinks[0];
     const doneRecipeDrink = {
       id: idDrink,
-      type: mealOrDrink,
+      type: mealOrDrink === 'drinks' && 'drink',
       nationality: !strArea ? '' : strArea,
       category: !strCategory ? '' : strCategory,
       alcoholicOrNot: strAlcoholic === null ? '' : strAlcoholic,
       name: strDrink,
       image: strDrinkThumb,
       doneDate: todayRecipe,
-      tags: strTags === null ? '' : strTags,
+      tags: strTags === null ? [] : [...strTags.split(',')],
     };
     return doneRecipeDrink;
   };
@@ -55,7 +59,7 @@ function FinishRecipeBtn({ recipeCurrent }) {
         JSON.stringify([...doneRecipesStorage, mealObj]),
       );
       push(routeDone);
-    } else if (mealOrDrink === 'meals') {
+    } else if (mealOrDrink === 'meals' && !doneRecipesStorage) {
       console.log('oi');
       const mealObj = objRecipeStorageMeal();
       localStorage.setItem('doneRecipes', JSON.stringify([mealObj]));
@@ -68,7 +72,7 @@ function FinishRecipeBtn({ recipeCurrent }) {
         JSON.stringify([...doneRecipesStorage, drinkObj]),
       );
       push(routeDone);
-    } else if (mealOrDrink === 'drinks') {
+    } else if (mealOrDrink === 'drinks' && !doneRecipesStorage) {
       console.log('oi');
       const drinkObj = objRecipeStorageDrink();
       localStorage.setItem('doneRecipes', JSON.stringify([drinkObj]));
