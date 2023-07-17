@@ -7,7 +7,7 @@ function Donerecipes() {
   return (
     <div>
       <Header icon={ drinkIcon } routeName={ routeName } />
-      {/* <DoneRecipes /> */}
+      <DoneRecipes />
     </div>
   );
 }

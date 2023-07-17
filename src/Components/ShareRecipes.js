@@ -1,9 +1,12 @@
 import clipboardCopy from 'clipboard-copy';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import PropTypes from 'prop-types';
 import shareImage from '../images/shareIcon.svg';
 
-function ShareRecipes() {
+function ShareRecipes({ index }) {
   const [copyLink, setCopyLink] = useState(false);
+  const { pathname } = useLocation();
 
   const handleClick = () => {
     clipboardCopy(window.location.href.replace('/in-progress', ''));
@@ -13,7 +16,8 @@ function ShareRecipes() {
   return (
     <div>
       <button
-        data-testid="share-btn"
+        data-testid={ (pathname === '/done-recipes')
+          ? `${index}-horizontal-share-btn` : 'share-btn' }
         onClick={ handleClick }
       >
         <img src={ shareImage } alt="Link" />
@@ -22,5 +26,9 @@ function ShareRecipes() {
     </div>
   );
 }
+
+ShareRecipes.propTypes = {
+  index: PropTypes.number,
+}.isRequired;
 
 export default ShareRecipes;

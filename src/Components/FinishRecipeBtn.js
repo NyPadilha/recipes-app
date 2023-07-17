@@ -5,17 +5,28 @@ function FinishRecipeBtn({ recipeCurrent, allChecked }) {
   const { push } = useHistory();
   const { drinks, meals } = recipeCurrent;
   const mealOrDrink = Object.keys(recipeCurrent)[0];
-  console.log(recipeCurrent);
+  const validateHoraMinSeg = 10;
+  const horaPlus = 3;
+  let millisec;
   const date = new Date();
   const today = date.getDate();
   const mes = date.getMonth() + 1;
   const ano = date.getFullYear();
-  const horas = date.getHours();
-  const minutos = date.getMinutes();
-  const seconds = date.getSeconds();
-  const milliseconds = date.getMilliseconds();
+  const horas = (date.getHours()
+  < validateHoraMinSeg) ? `0${date.getHours()}` : date.getHours();
+  const minutos = (date.getMinutes()
+  < validateHoraMinSeg) ? `0${date.getMinutes()}` : date.getMinutes();
+  const seconds = (date.getSeconds()
+  < validateHoraMinSeg) ? `0${date.getSeconds()}` : date.getSeconds();
+  if (date.getMilliseconds() < 100) {
+    millisec = `0${date.getMilliseconds()}`;
+  } else if (date.getMilliseconds() < validateHoraMinSeg) {
+    millisec = `00${date.getMilliseconds()}`;
+  } else {
+    millisec = date.getMilliseconds();
+  }
   const todayRecipe = `${ano}-${(mes.length !== 1)
-    ? `0${mes}` : mes}-${today}T${horas}:${minutos}:${seconds}.${milliseconds}Z`;
+    ? `0${mes}` : mes}-${today}T${horas + horaPlus}:${minutos}:${seconds}.${millisec}Z`;
   const routeDone = '/done-recipes';
 
   const doneRecipesStorage = JSON.parse(localStorage.getItem('doneRecipes'));
