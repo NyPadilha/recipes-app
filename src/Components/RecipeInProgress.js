@@ -21,6 +21,17 @@ export default function RecipeInProgress() {
     getRecipe();
   }, [id, pathname]);
 
+  useEffect(() => {
+    const checkboxStatesStorage = JSON.parse(localStorage.getItem('checkboxStates'));
+    if (checkboxStatesStorage) {
+      setCheckboxStates(checkboxStatesStorage);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
+  }, [checkboxStates]);
+
   const { meals, drinks } = recipeCurrent;
   const recipes = path === 'Meal' ? meals : drinks;
 
