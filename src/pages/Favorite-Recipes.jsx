@@ -1,10 +1,15 @@
 import Header from '../Components/Header';
+import FavoriteRecipes from '../Components/FavoriteRecipes';
 
-function FavoriteRecipes() {
+function Favoriterecipes() {
   const routeName = 'Favorite Recipes';
   return (
-    <Header routeName={ routeName } />
+    <div>
+      <Header routeName={ routeName } />
+      <FavoriteRecipes />
+    </div>
+
   );
 }
 
-export default FavoriteRecipes;
+export default Favoriterecipes;
