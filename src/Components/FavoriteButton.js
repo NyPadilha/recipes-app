@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
-export default function FavoriteRecipes({ details }) {
+export default function FavoriteRecipes({ details, index }) {
   const [favorite, setFavorite] = useState(false);
   const { pathname } = useLocation();
   const { id } = useParams();
@@ -52,7 +52,8 @@ export default function FavoriteRecipes({ details }) {
       <input
         type="image"
         alt="favorite-btn"
-        data-testid="favorite-btn"
+        data-testid={ (pathname === '/favorite-recipes')
+          ? `${index}-horizontal-favorite-btn` : 'favorite-btn' }
         onClick={ () => handleFavorite() }
         src={ favorite ? blackHeartIcon : whiteHeartIcon }
       />
@@ -63,5 +64,6 @@ export default function FavoriteRecipes({ details }) {
 FavoriteRecipes.propTypes = {
   details: PropTypes.shape,
   pathname: PropTypes.string,
+  index: PropTypes.number,
   id: PropTypes.string,
 }.isRequired;

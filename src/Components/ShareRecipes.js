@@ -13,11 +13,19 @@ function ShareRecipes({ index }) {
     setCopyLink(true);
   };
 
+  const validaRota = () => {
+    if (pathname === '/done-recipes' || pathname === '/favorite-recipes') {
+      return 'true';
+    }
+    return 'false';
+  };
+
   return (
     <div>
       <button
-        data-testid={ (pathname === '/done-recipes')
-          ? `${index}-horizontal-share-btn` : 'share-btn' }
+        data-testid={
+          validaRota() === 'true' ? `${index}-horizontal-share-btn` : 'share-btn'
+        }
         onClick={ handleClick }
       >
         <img src={ shareImage } alt="Link" />
