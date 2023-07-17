@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchApiRecipeID } from '../helpers/fetchApi';
-import FavoriteRecipes from './FavoriteRecipes';
 // eslint-disable-next-line import/no-named-as-default
 import FinishRecipeBtn from './FinishRecipeBtn';
 import ShareRecipes from './ShareRecipes';
 import './RecipeInProgress.css';
+import FavoriteButton from './FavoriteButton';
 
 export default function RecipeInProgress() {
   const [recipeCurrent, setRecipeCurrent] = useState([]);
@@ -143,7 +143,7 @@ export default function RecipeInProgress() {
           ))
         )
       }
-      <FavoriteRecipes details={ recipeCurrent } />
+      <FavoriteButton details={ recipeCurrent } />
       <ShareRecipes />
       <FinishRecipeBtn recipeCurrent={ recipeCurrent } allChecked={ allChecked } />
     </div>

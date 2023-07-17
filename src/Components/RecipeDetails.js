@@ -3,8 +3,8 @@ import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min
 import { fetchApiRecipeID, fetchApiUseEffect } from '../helpers/fetchApi';
 import StartRecipes from './StartRecipes';
 import './RecipeDetails.css';
-import FavoriteRecipes from './FavoriteRecipes';
 import ShareRecipes from './ShareRecipes';
+import FavoriteButton from './FavoriteButton';
 
 export default function RecipeDetails() {
   const [details, setDetails] = useState([]);
@@ -160,7 +160,7 @@ export default function RecipeDetails() {
           </div>
         )
       }
-      <FavoriteRecipes details={ details } />
+      <FavoriteButton details={ details } />
       <ShareRecipes />
       <StartRecipes details={ details } />
     </div>
