@@ -6,7 +6,7 @@ function ShareRecipes() {
   const [copyLink, setCopyLink] = useState(false);
 
   const handleClick = () => {
-    clipboardCopy(window.location.href);
+    clipboardCopy(window.location.href.replace('/in-progress', ''));
     setCopyLink(true);
   };
 
