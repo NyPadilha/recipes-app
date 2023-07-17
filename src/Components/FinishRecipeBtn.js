@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import PropTypes from 'prop-types';
 
 function FinishRecipeBtn({ recipeCurrent, allChecked }) {
   const { push } = useHistory();
@@ -12,8 +13,9 @@ function FinishRecipeBtn({ recipeCurrent, allChecked }) {
   const horas = date.getHours();
   const minutos = date.getMinutes();
   const seconds = date.getSeconds();
-  const segundos = date.getMilliseconds();
-  const todayRecipe = `${ano}-${(mes.length !== 1) ? `0${mes}` : mes}-${today}T${horas + 3}:${minutos}:${seconds}.${segundos}Z`;
+  const milliseconds = date.getMilliseconds();
+  const todayRecipe = `${ano}-${(mes.length !== 1)
+    ? `0${mes}` : mes}-${today}T${horas}:${minutos}:${seconds}.${milliseconds}Z`;
   const routeDone = '/done-recipes';
 
   const doneRecipesStorage = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -91,5 +93,10 @@ function FinishRecipeBtn({ recipeCurrent, allChecked }) {
     </button>
   );
 }
+
+FinishRecipeBtn.propTypes = {
+  recipeCurrent: PropTypes.shape,
+  allChecked: PropTypes.bool,
+}.isRequired;
 
 export default FinishRecipeBtn;

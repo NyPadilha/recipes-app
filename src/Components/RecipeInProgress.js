@@ -69,7 +69,7 @@ export default function RecipeInProgress() {
       }
     };
     verifyChecked();
-  }, [checkboxStates]);
+  }, [checkboxStates, ingredientsNumber]);
 
   return (
     <div>
