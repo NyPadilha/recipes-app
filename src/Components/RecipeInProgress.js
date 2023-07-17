@@ -145,7 +145,7 @@ export default function RecipeInProgress() {
       }
       <FavoriteRecipes details={ recipeCurrent } />
       <ShareRecipes />
-      <button data-testid="finish-recipe-btn">Finish</button>
+      <FinishRecipeBtn recipeCurrent={ recipeCurrent } allChecked={ allChecked } />
     </div>
   );
 }
