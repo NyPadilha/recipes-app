@@ -8,8 +8,14 @@ import './RecipeInProgress.css';
 export default function RecipeInProgress() {
   const [recipeCurrent, setRecipeCurrent] = useState([]);
   const [checkboxStates, setCheckboxStates] = useState([]);
+  const [ingredientsNumber, setIngredientsNumber] = useState([]);
+  const [allChecked, setAllChecked] = useState(false);
   const { id } = useParams();
   const { location: { pathname } } = useHistory();
+
+  console.log(checkboxStates);
+  console.log(ingredientsNumber.length);
+  console.log(allChecked);
 
   const path = pathname.includes('/meals') ? 'Meal' : 'Drink';
 
@@ -41,6 +47,31 @@ export default function RecipeInProgress() {
       [index]: !prevStates[index],
     }));
   };
+
+  useEffect(() => {
+    if (recipeCurrent.length !== 0) {
+      const ingredientsArray = Object.entries(recipes[0]).filter((key) => key[0]
+        .includes('strIngredient'));
+      const filteredIngredients = ingredientsArray.filter((ingredient) => (
+        ingredient[1] !== '' && ingredient[1] !== null
+      ));
+      setIngredientsNumber(filteredIngredients);
+    }
+  }, [recipeCurrent, path, recipes]);
+
+  useEffect(() => {
+    const verifyChecked = () => {
+      const checked = Object.values(checkboxStates);
+      if (checked.length === 0) {
+        setAllChecked(false);
+      } else if (checked.length === ingredientsNumber.length) {
+        setAllChecked(checked.every((value) => value === true));
+      } else {
+        setAllChecked(false);
+      }
+    };
+    verifyChecked();
+  }, [checkboxStates]);
 
   return (
     <div>
@@ -116,7 +147,13 @@ export default function RecipeInProgress() {
       }
       <FavoriteRecipes details={ recipeCurrent } />
       <ShareRecipes />
-      <button data-testid="finish-recipe-btn">Finish</button>
+      <button
+        data-testid="finish-recipe-btn"
+        disabled={ !allChecked }
+      >
+        Finish
+
+      </button>
     </div>
   );
 }
